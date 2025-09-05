@@ -1,0 +1,290 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_bankCap",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "DepositCapReached",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InsufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidDepositAmount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidWithdrawAmount",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "WithdrawLimitExceeded",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "usuario",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "monto",
+						"type": "uint256"
+					}
+				],
+				"name": "Deposito",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "usuario",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "monto",
+						"type": "uint256"
+					}
+				],
+				"name": "Retiro",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "LIMITE_RETIRO",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "usuario",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bankCap",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "depositar",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "montoRetiro",
+						"type": "uint256"
+					}
+				],
+				"name": "retirar",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalDepositos",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalRetiros",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"balanceOf(address)": {
+					"params": {
+						"usuario": "Dirección del usuario"
+					},
+					"returns": {
+						"_0": "Balance actual del usuario"
+					}
+				},
+				"constructor": {
+					"params": {
+						"_bankCap": "Límite global de depósitos"
+					}
+				},
+				"depositar()": {
+					"details": "Requiere que el monto sea > 0 y no supere el límite global"
+				},
+				"retirar(uint256)": {
+					"params": {
+						"montoRetiro": "Monto a retirar"
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"errors": {
+				"DepositCapReached()": [
+					{
+						"notice": "Lanzado cuando se excede el límite global de depósitos"
+					}
+				],
+				"InsufficientBalance()": [
+					{
+						"notice": "Lanzado cuando el usuario no tiene saldo suficiente"
+					}
+				],
+				"InvalidDepositAmount()": [
+					{
+						"notice": "Lanzado cuando el monto de depósito es inválido"
+					}
+				],
+				"InvalidWithdrawAmount()": [
+					{
+						"notice": "Lanzado cuando el monto de retiro es inválido"
+					}
+				],
+				"WithdrawLimitExceeded()": [
+					{
+						"notice": "Lanzado cuando el monto de retiro excede el límite permitido por transacción"
+					}
+				]
+			},
+			"events": {
+				"Deposito(address,uint256)": {
+					"notice": "Emitido cuando un usuario deposita ETH"
+				},
+				"Retiro(address,uint256)": {
+					"notice": "Emitido cuando un usuario retira ETH"
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"LIMITE_RETIRO()": {
+					"notice": "Límite máximo de retiro por transacción"
+				},
+				"balanceOf(address)": {
+					"notice": "Devuelve el balance de un usuario"
+				},
+				"bankCap()": {
+					"notice": "Límite global de depósitos permitido"
+				},
+				"depositar()": {
+					"notice": "Deposita ETH en el contrato"
+				},
+				"retirar(uint256)": {
+					"notice": "Retira un monto de ETH del balance del usuario"
+				},
+				"totalDepositos()": {
+					"notice": "Conteo de depósitos realizados"
+				},
+				"totalRetiros()": {
+					"notice": "Conteo de retiros realizados"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/KipuBank.sol": "KipuBank"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/KipuBank.sol": {
+			"keccak256": "0xbcba0a5b41345991475fe1f9bbaa2b0da167c012083e945add979c46245e83ab",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://798dacb57242ce83f49967be9495ac0484213a9af92a326d26d2f181323f074b",
+				"dweb:/ipfs/QmZD6dtkgm5HFHB17JJQybzLEVktwunE83vLFsPG9Tj54H"
+			]
+		}
+	},
+	"version": 1
+}
